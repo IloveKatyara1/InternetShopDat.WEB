@@ -1,0 +1,132 @@
+.header {
+    &_top {
+        background-color: $black-green;
+    }
+
+    &_midle_content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0 22px 0;
+    }
+
+    &_bottom {
+        .container {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    &_nav {
+        height: 50px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        &__ul {
+            width: 820px;
+            display: flex;
+            justify-content: space-between;
+
+            font-size: 16px;
+            font-weight: 300;
+            color: #fff;
+        }
+
+        &__hr {
+            height: 100%;
+            width: 1px;
+            color: #fff;
+        }
+
+        &_right {
+            width: 174px;
+            height: 21px;
+            display: flex;
+            justify-content: space-between;
+
+            &_text {
+                display: flex;
+
+                hr {
+                    margin: 0 7px;
+                }
+            }
+
+            &_sign {
+                font-size: 16px;
+                font-weight: 300;
+                color: #fff;
+            }
+        }
+    }
+
+    &_search {
+        border-radius: 90px;
+        border: 1px solid rgba(0, 0, 0, 0.2);
+        background: #fff;
+        border-radius: 90px;
+        display: flex;
+        width: 342px;
+        height: 40px;
+        align-items: center;
+        margin: 0 57px 0 30px;
+
+        &__input {
+            width: 291px;
+            height: 100%;
+            border: none;
+            border-radius: 90px 0 0 90px;
+            padding-left: 19px;
+        }
+
+        &__hr {
+            width: 1px;
+            height: 28px;
+            background: rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+
+        img {
+            width: 15px;
+            height: 15px;
+            margin: 0 22px 0 14px;
+        }
+    }
+
+    &_support {
+        display: flex;
+        align-items: center;
+        margin-right: 58px;
+
+        &__phone {
+            font-size: 16px;
+            width: 160px;
+            cursor: pointer;
+        }
+
+        &_wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-left: 6px;
+        }
+
+        &__descr {
+            color: $green;
+            font-size: 14px;
+            font-family: Montserrat;
+            font-weight: 700;
+            text-decoration-line: underline;
+            margin-top: 3px;
+        }
+    }
+
+    &_circles {
+        display: flex;
+
+        button:nth-child(2) {
+            margin: 0 15px;
+        }
+    }
+}
