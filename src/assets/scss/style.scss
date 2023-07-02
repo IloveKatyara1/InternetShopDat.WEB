@@ -11,7 +11,7 @@
 
 body {
     margin: 0 !important;
-    background-color: #f2f2f2;
+    background: #f8f8f8;
 }
 
 ul,
@@ -68,6 +68,30 @@ p {
 
     &::after {
         transform: translate(-2px, -50%) rotate(-135deg);
+    }
+}
+
+@media (max-width: 1114px) {
+    .container {
+        width: 869px;
+    }
+}
+
+@media (max-width: 873px) {
+    .container {
+        width: 725px;
+    }
+}
+
+@media (max-width: 730px) {
+    .container {
+        width: 450px;
+    }
+}
+
+@media (max-width: 455px) {
+    .container {
+        width: 290px;
     }
 }
 

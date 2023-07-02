@@ -1,4 +1,8 @@
 .button {
+    border: none;
+    background-color: $orange;
+    color: #fff;
+
     &_header {
         border-radius: 20px;
         border: 1px solid $black-green;
@@ -8,22 +12,37 @@
         justify-content: center;
         align-items: center;
 
+        color: #000;
+        font-size: 14px;
+        font-weight: 600;
+        text-transform: uppercase;
+        text-align: left;
+
         .maxWidth {
             max-width: 140px;
-        }
-
-        p {
-            color: #000;
-            font-size: 14px;
-            font-weight: 600;
-            text-transform: uppercase;
-            text-align: left;
         }
 
         img {
             max-width: 24px;
             max-height: 24px;
             margin-right: 9px;
+        }
+
+        &_active {
+            border: none;
+            background-color: $orange;
+
+            color: #fff;
+
+            .arrow_dropdown {
+                width: auto;
+
+                &::after,
+                &::before {
+                    background-color: #fff;
+                    display: none;
+                }
+            }
         }
     }
 
@@ -35,9 +54,57 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        background-color: rgba(#ffff, 0);
+
+        &_white {
+            border: 1px solid #fff;
+        }
 
         img {
             color: blue;
+        }
+    }
+}
+
+@media (max-width: 1114px) {
+    .button {
+        &_header {
+            margin: 12.5px auto 0 auto;
+
+            p {
+                font-size: 13px;
+                font-weight: 525;
+            }
+
+            img {
+                max-width: 22px;
+                max-height: 22px;
+                margin-right: 6px;
+            }
+        }
+    }
+}
+
+@media (max-width: 730px) {
+    .button {
+        &_header {
+            display: none;
+            width: 289px;
+            height: 47px;
+            padding-left: 20px;
+            justify-content: start;
+        }
+
+        &_header.arrow_dropdown {
+            display: flex;
+
+            &::after,
+            &::before {
+                background-color: #fff;
+                display: block;
+                right: 20px;
+                top: 50%;
+            }
         }
     }
 }
