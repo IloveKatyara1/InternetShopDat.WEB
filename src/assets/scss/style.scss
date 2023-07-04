@@ -46,6 +46,28 @@ p {
     margin: 0 auto;
 }
 
+.title {
+    font-size: 55px;
+    font-weight: 700;
+}
+
+.left-leaf {
+    position: relative;
+
+    &::before {
+        content: '';
+        display: block;
+        width: 32px;
+        height: 25px;
+        bottom: 14px;
+        position: absolute;
+        left: -44px;
+        background-image: url('../icons/leaf.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+}
+
 .arrow_dropdown {
     position: relative;
     width: 84px;
@@ -87,6 +109,10 @@ p {
     .container {
         width: 450px;
     }
+
+    h1.title {
+        font-size: 25px;
+    }
 }
 
 @media (max-width: 455px) {
@@ -98,3 +124,5 @@ p {
 @import './buttons';
 
 @import './components/header';
+
+@import './pages/main';

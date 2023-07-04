@@ -1,0 +1,97 @@
+.agrarian {
+    min-height: 935px;
+    width: 100%;
+    background-image: url('../../img/agrarian_bg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    z-index: -1;
+
+    .container {
+        padding: 340px 0 0 45px;
+    }
+
+    &__man {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 719.25px;
+        height: 595.5px;
+    }
+
+    &__subtitle {
+        font-size: 55px;
+        font-weight: 400;
+    }
+
+    &__descr {
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 18px;
+        font-weight: 400;
+        margin: 28px 0 23px 0;
+    }
+}
+
+@media (max-width: 1300px) {
+    .agrarian {
+        &__man {
+            width: 575.4px;
+            height: 476.4px;
+        }
+    }
+}
+
+@media (max-width: 1114px) {
+    .agrarian {
+        &__man {
+            width: 479.5px;
+            height: 397px;
+        }
+    }
+}
+
+@media (max-width: 730px) {
+    .agrarian {
+        min-height: 707px;
+
+        .container {
+            padding: 159px 0 40px 0;
+        }
+
+        .left-leaf::before {
+            bottom: -23px;
+        }
+
+        .title,
+        &__subtitle {
+            margin-left: 44px;
+        }
+
+        &__subtitle {
+            font-size: 25px;
+        }
+
+        &__descr {
+            font-size: 16px;
+            margin: 3px 0 -7.7px 44px;
+        }
+
+        &__man {
+            position: static;
+            display: block;
+            width: calc(100% + 30px);
+            height: auto;
+
+            margin: 0 0 29px -30px;
+        }
+    }
+}
+
+@media (max-width: 455px) {
+    .agrarian {
+        &__descr {
+            font-size: 15px;
+            margin: 3px 0 -7.7px 44px;
+        }
+    }
+}

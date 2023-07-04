@@ -2,6 +2,12 @@
     border: none;
     background-color: $orange;
     color: #fff;
+    border-radius: 90px;
+    width: 220px;
+    height: 47px;
+
+    font-size: 16px;
+    font-weight: 700;
 
     &_header {
         border-radius: 20px;
@@ -87,6 +93,13 @@
 
 @media (max-width: 730px) {
     .button {
+        &_agrarian {
+            width: 289px;
+            height: 47px;
+            margin: 0 auto;
+            display: block;
+        }
+
         &_header {
             display: none;
             width: 289px;
