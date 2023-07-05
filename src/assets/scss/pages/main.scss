@@ -32,11 +32,64 @@
     }
 }
 
+.about-company {
+    padding: 108px 0;
+
+    &_container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+    }
+
+    &__img {
+        background-image: url('../../img/aboutCompany.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 588.8px;
+        height: 462.4px;
+        position: absolute;
+        left: -150px;
+    }
+
+    &_text {
+        width: 541px;
+
+        .title {
+            margin-bottom: 25px;
+        }
+    }
+
+    &__descr {
+        margin-top: 14px;
+
+        font-size: 16px;
+        font-weight: 700;
+        color: rgba(#000000, 0.5);
+
+        span {
+            color: $black-green;
+        }
+    }
+}
+
 @media (max-width: 1300px) {
     .agrarian {
         &__man {
             width: 575.4px;
             height: 476.4px;
+        }
+    }
+
+    .about-company {
+        &__img {
+            width: 581.8px;
+            height: 460.4px;
+            left: -55px;
+        }
+
+        &_text {
+            width: 520px;
         }
     }
 }
@@ -46,6 +99,41 @@
         &__man {
             width: 479.5px;
             height: 397px;
+        }
+    }
+
+    .about-company {
+        &__img {
+            width: 340.8px;
+            height: 276.4px;
+            left: -8px;
+            background-image: url('../../img/aboutCompany_mobile.png');
+        }
+
+        &_text {
+            width: 500px;
+        }
+    }
+}
+
+@media (max-width: 873px) {
+    .about-company {
+        padding: 60px 0;
+
+        &_container {
+            display: block;
+        }
+
+        &_text {
+            width: 100%;
+        }
+
+        &__img {
+            display: block;
+            margin: 0 auto 30px auto;
+            position: static;
+            width: 475.8px;
+            height: 390.4px;
         }
     }
 }
@@ -85,6 +173,25 @@
             margin: 0 0 29px -30px;
         }
     }
+
+    .about-company {
+        padding: 40px 0 35px 0;
+
+        &__img {
+            width: 450px;
+            height: 367.4px;
+        }
+
+        &_text {
+            .title {
+                margin-bottom: 11px;
+            }
+        }
+
+        &__descr {
+            font-weight: 400;
+        }
+    }
 }
 
 @media (max-width: 455px) {
@@ -92,6 +199,14 @@
         &__descr {
             font-size: 15px;
             margin: 3px 0 -7.7px 44px;
+        }
+    }
+
+    .about-company {
+        &__img {
+            width: 290px;
+            height: 236.4px;
+            margin-bottom: 24px;
         }
     }
 }

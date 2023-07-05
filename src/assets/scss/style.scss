@@ -46,13 +46,16 @@ p {
     margin: 0 auto;
 }
 
-.title {
+.title,
+h1 {
     font-size: 55px;
     font-weight: 700;
 }
 
-.left-leaf {
+.left-leaf,
+h1 {
     position: relative;
+    padding-left: 49px;
 
     &::before {
         content: '';
@@ -61,7 +64,7 @@ p {
         height: 25px;
         bottom: 14px;
         position: absolute;
-        left: -44px;
+        left: -0px;
         background-image: url('../icons/leaf.png');
         background-repeat: no-repeat;
         background-size: cover;
@@ -103,6 +106,21 @@ p {
     .container {
         width: 725px;
     }
+
+    .title {
+        font-size: 35px;
+    }
+
+    .left-leaf {
+        padding-left: 40px;
+
+        &::before {
+            width: 26px;
+            height: 20px;
+            bottom: 10px;
+            bottom: 8.5px;
+        }
+    }
 }
 
 @media (max-width: 730px) {
@@ -110,14 +128,44 @@ p {
         width: 450px;
     }
 
-    h1.title {
+    h1,
+    .title {
         font-size: 25px;
+    }
+
+    h1 {
+        &::before {
+            bottom: -20px;
+        }
+    }
+
+    .left-leaf {
+        padding-left: 30px;
+
+        &::before {
+            width: 18px;
+            height: 14px;
+        }
     }
 }
 
 @media (max-width: 455px) {
     .container {
         width: 290px;
+    }
+
+    .title {
+        font-size: 22px;
+    }
+
+    .left-leaf {
+        padding-left: 23px;
+
+        &::before {
+            width: 14px;
+            height: 11px;
+            bottom: 5px;
+        }
     }
 }
 

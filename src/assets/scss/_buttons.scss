@@ -9,6 +9,10 @@
     font-size: 16px;
     font-weight: 700;
 
+    &_about-company {
+        margin-top: 37px;
+    }
+
     &_header {
         border-radius: 20px;
         border: 1px solid $black-green;
@@ -93,11 +97,13 @@
 
 @media (max-width: 730px) {
     .button {
-        &_agrarian {
-            width: 289px;
-            height: 47px;
-            margin: 0 auto;
-            display: block;
+        width: 289px;
+        height: 47px;
+        margin: 0 auto;
+        display: block;
+
+        &_about-company {
+            margin-top: 31px;
         }
 
         &_header {
