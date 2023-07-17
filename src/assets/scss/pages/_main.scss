@@ -73,6 +73,15 @@
     }
 }
 
+.news {
+    text-align: center;
+    padding-bottom: 120px;
+
+    .title {
+        margin-bottom: 39px;
+    }
+}
+
 @media (max-width: 1300px) {
     .agrarian {
         &__man {

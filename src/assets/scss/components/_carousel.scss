@@ -1,0 +1,130 @@
+.carouselComp {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    height: 395px;
+    width: 1025px;
+    align-items: center;
+    margin: 0 auto;
+
+    &_slide:last-child {
+        .card {
+            margin-right: 0;
+        }
+    }
+
+    &__prev {
+        margin-left: -20px;
+    }
+
+    &__next {
+        margin-right: -20px;
+    }
+
+    &__btn {
+        border: $green 1px solid;
+        border-radius: 100%;
+        width: 70px;
+        height: 70px;
+        background-color: rgba($green, 0);
+        color: $green;
+        font-size: 30px;
+        cursor: pointer;
+
+        &:hover {
+            background-color: rgba($green, 1);
+            color: #fff;
+        }
+    }
+
+    &__inner {
+        width: 855px;
+        overflow: hidden;
+        height: 395px;
+        position: relative;
+        margin-right: -32px;
+
+        &::after {
+            content: '';
+            display: block;
+            height: 100%;
+            width: 30px;
+            background-color: #f8f8f8;
+            position: absolute;
+            right: 0;
+            z-index: 10;
+        }
+    }
+
+    &__content {
+        display: flex;
+        position: absolute;
+        transition: 1s all;
+        cursor: grab;
+        height: 395px;
+    }
+
+    &__dots_wrapper {
+        position: absolute;
+        display: flex;
+        bottom: 0;
+        left: 0%;
+        transition: 0.5s all;
+        align-items: flex-end;
+        height: 30px;
+
+        div:first-child {
+            margin: 0 5px 0 0;
+        }
+
+        div:last-child {
+            margin: 0 0px 0 5px;
+        }
+
+        &_parent {
+            margin: 0 auto;
+            width: 76px;
+            height: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+    }
+
+    &__dot {
+        font-size: 0;
+        width: 6px;
+        height: 16px;
+        border-radius: 20px;
+        background: rgba(141, 50, 0, 0.1);
+        margin: 0 5px;
+        transition: 0.5s all;
+        cursor: pointer;
+        z-index: 9;
+        position: relative;
+
+        &_active {
+            background-color: $red;
+            height: 30px;
+        }
+    }
+}
+
+.dots_overflow {
+    &__right,
+    &__left {
+        width: calc(50vw - 50px);
+        background-color: #f8f8f8;
+        height: 30px;
+        position: absolute;
+        z-index: 15;
+        transform: translateY(-100%);
+    }
+
+    &__right {
+        right: 0;
+    }
+
+    &__left {
+        left: 0;
+    }
+}

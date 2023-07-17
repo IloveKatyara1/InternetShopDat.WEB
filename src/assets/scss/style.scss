@@ -52,23 +52,34 @@ h1 {
     font-weight: 700;
 }
 
+.right-leaf::after,
+.left-leaf::before,
+h1::before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 32px;
+    height: 25px;
+    bottom: 14px;
+    background-image: url('../icons/leaf.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
 .left-leaf,
 h1 {
     position: relative;
-    padding-left: 49px;
+    padding: 0 49px;
+    display: inline-block;
 
     &::before {
-        content: '';
-        display: block;
-        width: 32px;
-        height: 25px;
-        bottom: 14px;
-        position: absolute;
-        left: -0px;
-        background-image: url('../icons/leaf.png');
-        background-repeat: no-repeat;
-        background-size: cover;
+        left: 0px;
     }
+}
+
+.right-leaf::after {
+    transform: scale(-1, 1);
+    right: 0px;
 }
 
 .arrow_dropdown {
@@ -172,5 +183,7 @@ h1 {
 @import './buttons';
 
 @import './components/header';
+@import './components/carousel';
+@import './components/card';
 
 @import './pages/main';
