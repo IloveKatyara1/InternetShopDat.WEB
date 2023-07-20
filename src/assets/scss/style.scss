@@ -123,14 +123,14 @@ h1 {
     }
 
     .left-leaf {
-        padding-left: 40px;
+        padding: 0 40px;
+    }
 
-        &::before {
-            width: 26px;
-            height: 20px;
-            bottom: 10px;
-            bottom: 8.5px;
-        }
+    .left-leaf::before,
+    .right-leaf::after {
+        width: 26px;
+        height: 20px;
+        bottom: 8.5px;
     }
 }
 
@@ -151,12 +151,13 @@ h1 {
     }
 
     .left-leaf {
-        padding-left: 30px;
+        padding: 0 30px;
+    }
 
-        &::before {
-            width: 18px;
-            height: 14px;
-        }
+    .left-leaf::before,
+    .right-leaf::after {
+        width: 18px;
+        height: 14px;
     }
 }
 
@@ -170,13 +171,14 @@ h1 {
     }
 
     .left-leaf {
-        padding-left: 23px;
+        padding: 0 23px;
+    }
 
-        &::before {
-            width: 14px;
-            height: 11px;
-            bottom: 5px;
-        }
+    .left-leaf::before,
+    .right-leaf::after {
+        width: 14px;
+        height: 11px;
+        bottom: 5px;
     }
 }
 

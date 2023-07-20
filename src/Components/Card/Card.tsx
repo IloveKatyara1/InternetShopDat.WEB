@@ -16,7 +16,9 @@ const Card = ({
 }) => {
     return (
         <div className="card">
-            <img src={scales} alt="scales" className="card__scales" />
+            <a href="#">
+                <img src={scales} alt="scales" className="card__scales" />
+            </a>
             <a href={link}>
                 <img src={img} alt={name} className="card__main-img" />
             </a>

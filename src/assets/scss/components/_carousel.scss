@@ -60,7 +60,6 @@
         display: flex;
         position: absolute;
         transition: 1s all;
-        cursor: grab;
         height: 395px;
     }
 
@@ -126,5 +125,44 @@
 
     &__left {
         left: 0;
+    }
+}
+
+@media (max-width: 1075px) {
+    .carouselComp {
+        width: 720px;
+
+        &__inner {
+            width: 569px;
+            margin-right: -10px;
+
+            &::after {
+                display: none;
+            }
+        }
+
+        &__btn {
+            width: 60px;
+            height: 60px;
+            font-size: 25px;
+        }
+    }
+}
+
+@media (max-width: 777px) {
+    .carouselComp {
+        width: 100%;
+
+        &__inner {
+            width: 100%;
+        }
+
+        &__btn {
+            display: none;
+        }
+
+        .card {
+            margin: 0 auto;
+        }
     }
 }

@@ -123,6 +123,10 @@
             width: 500px;
         }
     }
+
+    .news {
+        padding-bottom: 100px;
+    }
 }
 
 @media (max-width: 873px) {
@@ -144,6 +148,10 @@
             width: 475.8px;
             height: 390.4px;
         }
+    }
+
+    .news {
+        padding-bottom: 80px;
     }
 }
 
@@ -201,6 +209,10 @@
             font-weight: 400;
         }
     }
+
+    .news {
+        padding-bottom: 60px;
+    }
 }
 
 @media (max-width: 455px) {
@@ -217,5 +229,9 @@
             height: 236.4px;
             margin-bottom: 24px;
         }
+    }
+
+    .news {
+        padding-bottom: 40px;
     }
 }

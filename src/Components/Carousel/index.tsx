@@ -1,14 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const Carousel = ({
-    classes,
-    children,
-    showSlides,
-}: {
-    classes?: string[] | string;
-    children: any;
-    showSlides: number;
-}) => {
+const Carousel = ({ classes, children }: { classes?: string[] | string; children: any }) => {
     const sliderContent = useRef<any>(null);
     const dotsRef = useRef<any[]>([]);
     const dotsParrentRef = useRef<any>(null);
@@ -16,6 +8,17 @@ const Carousel = ({
     const [currentSlide, setCurrentSlide] = useState<number>(0);
     const [cantMove, setCantMove] = useState<boolean>(false);
     const [lastActiveDot, setLastActiveDot] = useState<number>(0);
+
+    let showSlides: number = 3;
+
+    console.log(document.documentElement.clientWidth);
+
+    if (document.documentElement.clientWidth < 515) {
+        showSlides--;
+    }
+    if (document.documentElement.clientWidth < 1075) {
+        showSlides--;
+    }
 
     const childrenSlides = React.Children.map(children, (child) => {
         return React.cloneElement(child, {
@@ -122,6 +125,35 @@ const Carousel = ({
         dotsRef.current[slide / showSlides].classList.add('carouselComp__dot_active');
     };
 
+    let mouseStart: number;
+
+    const onStart = (e: any) => {
+        if (cantMove) return;
+
+        mouseStart = e.nativeEvent.targetTouches[0].clientX;
+
+        sliderContent.current.style.transition = '0s all';
+    };
+
+    const onMove = (e: any) => {
+        let move = e.nativeEvent.targetTouches[0].clientX;
+
+        if (cantMove) return;
+        if (mouseStart - move > 400 || mouseStart - move < -400) return;
+
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 - (mouseStart - move) / 4 + '%';
+    };
+
+    const onEnd = (e: any) => {
+        sliderContent.current.style.transition = '1s all';
+
+        let end = mouseStart - e.nativeEvent.changedTouches[0].clientX;
+
+        if (end > 100) setCurrentSlide((currentSlide) => currentSlide + showSlides);
+        else if (end < -100) setCurrentSlide((currentSlide) => currentSlide - showSlides);
+        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 + '%';
+    };
+
     let clazz: string = ' ';
 
     if (classes) {
@@ -138,7 +170,10 @@ const Carousel = ({
                     <div
                         className="carouselComp__content"
                         style={{ width: (fullChildrenList.length / showSlides) * 100 + '%' }}
-                        ref={sliderContent}>
+                        ref={sliderContent}
+                        onTouchStart={onStart}
+                        onTouchMove={onMove}
+                        onTouchEnd={onEnd}>
                         {fullChildrenList}
                     </div>
                 </div>

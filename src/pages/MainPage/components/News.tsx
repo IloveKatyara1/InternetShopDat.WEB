@@ -7,7 +7,7 @@ const News = () => {
     return (
         <section className="news">
             <h2 className="title left-leaf right-leaf">Новинки</h2>
-            <Carousel showSlides={3}>
+            <Carousel>
                 <div>
                     <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
                 </div>
