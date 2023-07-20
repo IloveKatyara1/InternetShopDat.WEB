@@ -181,8 +181,8 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
                     &#8594;
                 </button>
             </div>
-            <div className="carouselComp__dots_wrapper_parent">
-                <div className="carouselComp__dots_wrapper" ref={dotsParrentRef}>
+            <div className={`carouselComp__dots_wrapper_parent ${clazz}__dots_wrapper_parent`}>
+                <div className={`carouselComp__dots_wrapper ${clazz}__dots_wrapper`} ref={dotsParrentRef}>
                     {dots}
                 </div>
             </div>

@@ -56,6 +56,10 @@
         }
     }
 
+    .white_dots &__inner::after {
+        background-color: $black-green;
+    }
+
     &__content {
         display: flex;
         position: absolute;
@@ -105,6 +109,22 @@
             background-color: $red;
             height: 30px;
         }
+    }
+
+    .white_dots__dots_wrapper &__dot {
+        background: rgba(255, 255, 255, 0.2);
+
+        &_active {
+            background-color: rgba(255, 255, 255, 1);
+        }
+    }
+}
+
+.white_dots {
+    margin: 39px auto 0 auto;
+
+    &__dots_wrapper_parent {
+        margin-bottom: 40px;
     }
 }
 

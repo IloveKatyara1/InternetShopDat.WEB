@@ -1,4 +1,4 @@
-import Card from '../../../Components/Card/Card';
+import Card from '../../../Components/Card';
 import Carousel from '../../../Components/Carousel';
 
 import cardImg from '../../../assets/img/card_image.png';

@@ -52,6 +52,13 @@ h1 {
     font-weight: 700;
 }
 
+.title {
+    &_white {
+        color: #ffff;
+        text-align: center;
+    }
+}
+
 .right-leaf::after,
 .left-leaf::before,
 h1::before {
@@ -158,6 +165,11 @@ h1 {
     .right-leaf::after {
         width: 18px;
         height: 14px;
+    }
+
+    .right-leaf::after {
+        transform: scale(1, 1);
+        right: 0px;
     }
 }
 
