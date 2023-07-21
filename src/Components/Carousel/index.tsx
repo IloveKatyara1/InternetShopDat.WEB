@@ -1,6 +1,16 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-const Carousel = ({ classes, children }: { classes?: string[] | string; children: any }) => {
+const Carousel = ({
+    classes,
+    children,
+    showSlidesProp,
+    infinity = true,
+}: {
+    classes?: string[] | string;
+    children: any;
+    showSlidesProp?: number;
+    infinity?: boolean;
+}) => {
     const sliderContent = useRef<any>(null);
     const dotsRef = useRef<any[]>([]);
     const dotsParrentRef = useRef<any>(null);
@@ -9,16 +19,18 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
     const [cantMove, setCantMove] = useState<boolean>(false);
     const [lastActiveDot, setLastActiveDot] = useState<number>(0);
 
-    let showSlides: number = 3;
+    const needMinus = infinity ? 100 : 0;
 
-    console.log(document.documentElement.clientWidth);
+    let showSlides: number = showSlidesProp || 3;
 
-    if (document.documentElement.clientWidth < 515) {
+    if (document.documentElement.clientWidth < 515 && !showSlidesProp) {
         showSlides--;
     }
-    if (document.documentElement.clientWidth < 1075) {
+    if (document.documentElement.clientWidth < 1075 && !showSlidesProp) {
         showSlides--;
     }
+
+    console.log(showSlides, showSlidesProp);
 
     const childrenSlides = React.Children.map(children, (child) => {
         return React.cloneElement(child, {
@@ -56,6 +68,13 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
     ];
 
     const ChangeSlideByBtn = (num: number) => {
+        if (
+            (num < 0 && currentSlide <= 0 && !infinity) ||
+            (num > 0 && currentSlide >= childrenSlides.length - showSlides && !infinity)
+        ) {
+            return;
+        }
+
         let newCurrent = currentSlide;
         newCurrent += num > 0 ? showSlides : -showSlides;
 
@@ -67,11 +86,13 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
     }, []);
 
     useEffect(() => {
+        console.log(currentSlide);
+
         if (cantMove) {
             return;
         }
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
 
         if (currentSlide < 0) {
             timeoutLastFirstSlide(childrenSlides.length - showSlides);
@@ -105,19 +126,19 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
     const changeActiveDot = (slide: number) => {
         let leftPx: number = 0;
 
-        const correctI = slide / 3;
+        const correctI = slide / showSlides;
 
         if (correctI < 2) {
             leftPx = 0;
-        } else if (correctI > childrenSlides.length / 3 - 3) {
-            leftPx = -16 * (childrenSlides.length / 3 - 5);
+        } else if (correctI > childrenSlides.length / showSlides - 3) {
+            leftPx = -16 * (childrenSlides.length / showSlides - 5);
         } else {
             leftPx = -16 * (correctI - 2);
         }
 
         dotsParrentRef.current.style.left = leftPx + 'px';
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
 
         setLastActiveDot(slide / showSlides);
 
@@ -136,12 +157,19 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
     };
 
     const onMove = (e: any) => {
-        let move = e.nativeEvent.targetTouches[0].clientX;
+        let move = mouseStart - e.nativeEvent.targetTouches[0].clientX;
 
-        if (cantMove) return;
-        if (mouseStart - move > 400 || mouseStart - move < -400) return;
+        if (
+            cantMove ||
+            move > 400 ||
+            move < -400 ||
+            (move < 0 && currentSlide <= 0 && !infinity) ||
+            (move > 0 && currentSlide >= childrenSlides.length - showSlides && !infinity)
+        ) {
+            return;
+        }
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 - (mouseStart - move) / 4 + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus - move / 4 + '%';
     };
 
     const onEnd = (e: any) => {
@@ -149,9 +177,16 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
 
         let end = mouseStart - e.nativeEvent.changedTouches[0].clientX;
 
+        if (
+            (end < 0 && currentSlide <= 0 && !infinity) ||
+            (end > 0 && currentSlide >= childrenSlides.length - showSlides && !infinity)
+        ) {
+            return;
+        }
+
         if (end > 100) setCurrentSlide((currentSlide) => currentSlide + showSlides);
         else if (end < -100) setCurrentSlide((currentSlide) => currentSlide - showSlides);
-        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - 100 + '%';
+        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
     };
 
     let clazz: string = ' ';
@@ -174,7 +209,7 @@ const Carousel = ({ classes, children }: { classes?: string[] | string; children
                         onTouchStart={onStart}
                         onTouchMove={onMove}
                         onTouchEnd={onEnd}>
-                        {fullChildrenList}
+                        {infinity ? fullChildrenList : childrenSlides}
                     </div>
                 </div>
                 <button className="carouselComp__btn carouselComp__next" onClick={() => ChangeSlideByBtn(1)}>
