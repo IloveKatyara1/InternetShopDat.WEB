@@ -116,6 +116,25 @@
     }
 }
 
+.seed {
+    padding: 109px 0 120px 0;
+    width: 100%;
+    background-image: url('../../img/seedBg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    &__p {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 20px;
+
+        &:first-child {
+            margin-top: 15px;
+        }
+    }
+}
+
 @media (max-width: 1300px) {
     .agrarian {
         &__man {
