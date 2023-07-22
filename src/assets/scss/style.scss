@@ -120,7 +120,7 @@ h1 {
     }
 }
 
-@media (max-width: 873px) {
+@media (max-width: 890px) {
     .container {
         width: 725px;
     }
@@ -196,8 +196,9 @@ h1 {
 
 @import './buttons';
 
+@import './components/card';
+@import './components/support';
 @import './components/header';
 @import './components/carousel';
-@import './components/card';
 
 @import './pages/main';

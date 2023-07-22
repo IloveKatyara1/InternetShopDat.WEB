@@ -1,3 +1,5 @@
+import Support from '../Support';
+
 import logo from '../../assets/img/Logo.png';
 import log from '../../assets/icons/login.svg';
 import iconSearch from '../../assets/icons/search.png';
@@ -6,7 +8,6 @@ import iconBtn2 from '../../assets/icons/header-btn2.svg';
 import iconBtn3 from '../../assets/icons/header-btn3.svg';
 import iconBtn4 from '../../assets/icons/header-btn4.svg';
 import iconBtn5 from '../../assets/icons/header-btn5.svg';
-import phone from '../../assets/icons/phone.svg';
 import scales from '../../assets/icons/scales.svg';
 import basket from '../../assets/icons/basket.svg';
 import heart from '../../assets/icons/heart.png';
@@ -80,19 +81,7 @@ const Header = () => {
                             </div>
                         </div>
                         <div className="header_midle_right">
-                            <div className="header_support">
-                                <button className="button_circle">
-                                    <img src={phone} alt="phone" />
-                                </button>
-                                <div className="header_support_wrapper">
-                                    <a href="tel:+380671150058" className="header_support__phone arrow_dropdown">
-                                        +38 (067) 115 00 58
-                                    </a>
-                                    <a href="#" className="header_support__descr">
-                                        Замовити зворотній зв’язок
-                                    </a>
-                                </div>
-                            </div>
+                            <Support classes="header_support" />
                             <div className="header_circles">
                                 <button className="button_circle">
                                     <img src={heart} alt="вподобані" />
@@ -169,43 +158,31 @@ const Header = () => {
                         </button>
                     </div>
                 </div>
-                <div className="header_search">
+                <div className="header_search header_sidebar_search">
                     <input type="text" className="header_search__input" placeholder="Пошук" />
                     <hr className="header_search__hr" />
                     <img src={iconSearch} alt="search" className="header_search__icon" />
                 </div>
-                <div className="header_support">
-                    <button className="button_circle button_circle_white">
-                        <img src={phoneWhite} alt="phone" />
-                    </button>
-                    <div className="header_support_wrapper">
-                        <a href="tel:+380671150058" className="header_support__phone arrow_dropdown">
-                            +38 (067) 115 00 58
-                        </a>
-                        <a href="#" className="header_support__descr">
-                            Замовити зворотній зв’язок
-                        </a>
-                    </div>
-                </div>
+                <Support classes="header_support header_sidebar_support" classCircle="button_circle_white" />
                 <ul className="header_sidebar__ul">
                     <hr className="header_sidebar__hr" />
                     <a href="#">
-                        <li className="header__li">Про компанію</li>
+                        <li className="header__li header_sidebar__li">Про компанію</li>
                     </a>
                     <a href="#">
-                        <li className="header__li">Каталог продукції</li>
+                        <li className="header__li header_sidebar__li">Каталог продукції</li>
                     </a>
                     <a href="#">
-                        <li className="header__li">Оплата і доставка</li>
+                        <li className="header__li header_sidebar__li">Оплата і доставка</li>
                     </a>
                     <a href="#">
-                        <li className="header__li">Партнери</li>
+                        <li className="header__li header_sidebar__li">Партнери</li>
                     </a>
                     <a href="#">
-                        <li className="header__li">Новини</li>
+                        <li className="header__li header_sidebar__li">Новини</li>
                     </a>
                     <a href="#">
-                        <li className="header__li">Контакти</li>
+                        <li className="header__li header_sidebar__li">Контакти</li>
                     </a>
                 </ul>
             </div>

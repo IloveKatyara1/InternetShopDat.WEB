@@ -1,0 +1,39 @@
+.support {
+    display: flex;
+    align-items: center;
+
+    &__phone {
+        font-size: 16px;
+        cursor: pointer;
+        width: 150px;
+    }
+
+    &_wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-left: 6px;
+    }
+
+    &__descr {
+        color: $green;
+        font-size: 14px;
+        font-family: Montserrat;
+        font-weight: 700;
+        text-decoration-line: underline;
+        margin-top: 3px;
+    }
+}
+
+@media (max-width: 1114px) {
+    .support {
+        &__phone {
+            font-size: 14px;
+            width: 130px;
+        }
+
+        &__descr {
+            margin-top: 0;
+            font-size: 10.5px;
+        }
+    }
+}
