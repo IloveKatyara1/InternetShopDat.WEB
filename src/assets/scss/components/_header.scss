@@ -95,7 +95,6 @@
             &__phone {
                 color: #fff;
                 font-size: 16px;
-                width: 160px;
             }
 
             &__descr {
@@ -230,8 +229,12 @@
 
         &__phone {
             font-size: 16px;
-            width: 160px;
             cursor: pointer;
+
+            &::after,
+            &::before {
+                right: 45px;
+            }
         }
 
         &_wrapper {
@@ -295,7 +298,11 @@
 
             &__phone {
                 font-size: 14px;
-                width: 141.5px;
+
+                &::after,
+                &::before {
+                    right: 7px;
+                }
             }
 
             &__descr {
@@ -322,8 +329,9 @@
 @media (max-width: 873px) {
     .header {
         &_nav {
-            .arrow_dropdown {
-                width: 74px;
+            .arrow_dropdown::after,
+            .arrow_dropdown::before {
+                right: -10px;
             }
 
             &__ul {
@@ -384,6 +392,13 @@
 
         &_support {
             margin-right: 36px;
+
+            &__phone {
+                &::after,
+                &::before {
+                    right: 18px;
+                }
+            }
         }
     }
 }
@@ -454,6 +469,15 @@
         &_support,
         &_nav {
             display: none;
+        }
+
+        &_support {
+            &__phone {
+                &::after,
+                &::before {
+                    right: 45px;
+                }
+            }
         }
     }
 }

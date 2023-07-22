@@ -91,7 +91,7 @@ h1 {
 
 .arrow_dropdown {
     position: relative;
-    width: 84px;
+    display: inline-block;
 
     &::before,
     &::after {
@@ -100,7 +100,7 @@ h1 {
         height: 2px;
         display: block;
         position: absolute;
-        right: 0;
+        right: -15px;
         top: 59%;
         background-color: $green;
     }
