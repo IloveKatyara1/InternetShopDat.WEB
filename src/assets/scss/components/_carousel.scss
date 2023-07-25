@@ -30,11 +30,6 @@
         color: $green;
         font-size: 30px;
         cursor: pointer;
-
-        &:hover {
-            background-color: rgba($green, 1);
-            color: #fff;
-        }
     }
 
     &__inner {
