@@ -3,7 +3,42 @@
     height: 50px;
 
     &__li {
-        color: #fff;
+        a {
+            display: block;
+            line-height: 50px;
+            color: #fff;
+        }
+    }
+
+    &__li.arrow_dropdown {
+        cursor: pointer;
+        height: 50px;
+        width: 104px;
+        text-align: center;
+        line-height: 50px;
+        padding-right: 8px;
+    }
+
+    &__li_active {
+        background: #347153;
+    }
+
+    &__li_dropdown {
+        border-radius: 0px 0px 20px 20px;
+        background: #347153;
+        width: 221px;
+        height: 133px;
+        position: absolute;
+        top: 50px;
+        padding: 5px 0 12px 18px;
+
+        a {
+            font-size: 16px;
+            font-weight: 300;
+            line-height: 40px;
+            color: #fff;
+            display: block;
+        }
     }
 
     &_top {
@@ -14,29 +49,6 @@
 
     &__hamburger {
         display: none;
-        width: 28px;
-        padding-left: 7px;
-
-        span {
-            display: block;
-            width: 21px;
-            background-color: $green;
-            height: 5px;
-            margin: 2px 0;
-            border-radius: 5px;
-            position: relative;
-
-            &::before {
-                content: '';
-                display: block;
-                height: 5px;
-                width: 5px;
-                background-color: $green;
-                border-radius: 100%;
-                position: absolute;
-                left: -7px;
-            }
-        }
     }
 
     &_midle_content {
@@ -227,9 +239,8 @@
 @media (max-width: 890px) {
     .header {
         &_nav {
-            .arrow_dropdown::after,
-            .arrow_dropdown::before {
-                right: -10px;
+            .arrow_dropdown {
+                width: 95px;
             }
 
             &__ul {
@@ -296,6 +307,15 @@
 
 @media (max-width: 730px) {
     .header {
+        padding-top: 50px;
+
+        &_top {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+        }
+
         &_midle {
             &_content {
                 flex-direction: row;
@@ -320,6 +340,55 @@
 
         &__hamburger {
             display: block;
+            width: 28px;
+            padding-left: 7px;
+
+            span {
+                display: block;
+                width: 21px;
+                background-color: $green;
+                height: 5px;
+                margin: 2px 0;
+                border-radius: 5px;
+                position: relative;
+                transition: 1s all;
+
+                &::before,
+                &::after {
+                    content: '';
+                    display: block;
+                    height: 5px;
+                    width: 5px;
+                    background-color: $green;
+                    border-radius: 100%;
+                    position: absolute;
+                    left: -7px;
+                }
+
+                &::after {
+                    display: none;
+                    right: -7px;
+                    left: auto;
+                }
+            }
+
+            &_active {
+                span::after {
+                    display: block;
+                }
+
+                span:nth-child(1) {
+                    transform: rotate(315deg) translateY(5px);
+                }
+
+                span:nth-child(2) {
+                    display: none;
+                }
+
+                span:nth-child(3) {
+                    transform: rotate(-315deg) translateY(-5px);
+                }
+            }
         }
 
         &_top {
@@ -367,11 +436,17 @@
             width: 75%;
             position: fixed;
             top: 0;
-            left: 0;
+            left: -100%;
             height: 100vh;
-            flex-direction: column-reverse;
             background-color: $black-green;
             padding: 70px 16px 0 16px;
+            display: block;
+            transition: 1s all;
+            overflow: scroll;
+
+            &_active {
+                left: 0%;
+            }
 
             &_top {
                 display: flex;
@@ -399,7 +474,7 @@
                     &__phone {
                         color: #fff;
                         font-size: 16px;
-                        width: 150px;
+                        width: 170px;
                     }
 
                     &__descr {

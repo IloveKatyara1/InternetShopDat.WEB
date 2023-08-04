@@ -3,7 +3,7 @@ import agrarianMan from '../../../assets/img/agrarian_man.png';
 const Agrarian = () => {
     return (
         <section className="agrarian">
-            <div className="container">
+            <div className="container header_mobile_margin">
                 <h1>Аграрний</h1>
                 <h3 className="agrarian__subtitle">інтернет-магазин</h3>
                 <p className="agrarian__descr">

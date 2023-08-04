@@ -1,17 +1,43 @@
 .support {
-    display: flex;
-    align-items: center;
+    width: 259px;
+    height: 41px;
+
+    &__phone,
+    &__phone_active {
+        font-size: 16px;
+        font-weight: 400;
+        cursor: pointer;
+    }
 
     &__phone {
-        font-size: 16px;
-        cursor: pointer;
-        width: 150px;
+        border: none;
+        background: rgba(#000000, 0);
+        text-align: left;
+        width: 170px;
+
+        &_active {
+            margin-bottom: 13px;
+            display: block;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
     }
 
     &_wrapper {
         display: flex;
-        flex-direction: column;
-        margin-left: 6px;
+        align-items: center;
+
+        &_right {
+            display: flex;
+            flex-direction: column;
+            margin-left: 6px;
+        }
+
+        &_active {
+            padding-left: 57px;
+        }
     }
 
     &__descr {
@@ -22,13 +48,44 @@
         text-decoration-line: underline;
         margin-top: 3px;
     }
+
+    &_active_wrapper {
+        display: none;
+        margin: 17px 0 0 -20px;
+    }
+
+    &_active {
+        .support_wrapper_main {
+            width: 280px;
+            height: 130px;
+            background-color: #fff;
+            box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.15);
+            border-radius: 20px;
+            padding-top: 10px;
+            position: absolute;
+            z-index: 101;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}
+
+.header_sidebar_support.support_active {
+    .button_circle_white {
+        border: 1px solid $red;
+    }
+
+    .support__phone {
+        color: #000;
+    }
 }
 
 @media (max-width: 1114px) {
     .support {
         &__phone {
             font-size: 14px;
-            width: 130px;
+            width: 155px;
         }
 
         &__descr {

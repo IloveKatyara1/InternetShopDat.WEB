@@ -89,6 +89,16 @@ h1 {
     right: 0px;
 }
 
+.fadeIn {
+    animation: fadeIn 0.5s forwards;
+}
+
+.fadeOut {
+    animation: fadeOut 0.5s forwards;
+    opacity: 0;
+    z-index: -1;
+}
+
 .arrow_dropdown {
     position: relative;
     display: inline-block;
@@ -100,9 +110,10 @@ h1 {
         height: 2px;
         display: block;
         position: absolute;
-        right: -15px;
-        top: 59%;
+        right: 10px;
+        top: 50%;
         background-color: $green;
+        transition: 0.3s all;
     }
 
     &::before {
@@ -112,6 +123,18 @@ h1 {
     &::after {
         transform: translate(-2px, -50%) rotate(-135deg);
     }
+
+    &_reverse::before {
+        transform: translate(2px, -50%) rotate(45deg);
+    }
+
+    &_reverse::after {
+        transform: translate(-2px, -50%) rotate(-45deg);
+    }
+}
+
+.header_mobile_margin {
+    transition: 0.4s all;
 }
 
 @media (max-width: 1114px) {
@@ -196,6 +219,7 @@ h1 {
 
 @import './buttons';
 @import './hover';
+@import './animations';
 
 @import './components/card';
 @import './components/support';
@@ -205,3 +229,11 @@ h1 {
 @import './components/pageUp';
 
 @import './pages/main';
+
+.active {
+    display: block;
+
+    &_flex {
+        display: flex;
+    }
+}

@@ -113,11 +113,16 @@
         }
 
         &_header {
-            display: none;
             width: 289px;
             height: 47px;
             padding-left: 20px;
             justify-content: start;
+            opacity: 0;
+
+            &_active {
+                z-index: 10;
+                opacity: 1;
+            }
         }
 
         &_header.arrow_dropdown {
