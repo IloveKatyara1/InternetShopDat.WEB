@@ -7,4 +7,10 @@
     .page-up:hover {
         height: 130px;
     }
+
+    .button_header:hover {
+        border: none;
+        background-color: $orange;
+        color: #fff;
+    }
 }

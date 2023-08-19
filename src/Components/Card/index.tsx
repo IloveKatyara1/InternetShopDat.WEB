@@ -1,15 +1,17 @@
 import scales from '../../assets/icons/scales.svg';
 import basket from '../../assets/icons/basket.svg';
 
+import deleteImg from '../../assets/img/card_image.png';
+
 const Card = ({
     img,
-    items,
+    itemsAvailable,
     name,
     price,
     link,
 }: {
     img: string;
-    items: number;
+    itemsAvailable: number;
     name: string;
     price: number;
     link: string;
@@ -27,12 +29,12 @@ const Card = ({
                     <a href="#">
                         <h3 className="card__name">{name}</h3>
                     </a>
-                    <h4 className="card__availability">{items ? 'в наявності' : 'немає в наявності'}</h4>
+                    <h4 className="card__availability">{itemsAvailable ? 'в наявності' : 'немає в наявності'}</h4>
                 </div>
                 <div className="card_bottom_bottom">
                     <div className="card_right">
                         <h3 className="card__price">{price} грн</h3>
-                        <h4 className="card__availabil-items">{items} шт.</h4>
+                        <h4 className="card__availabil-items">{itemsAvailable < 99 ? itemsAvailable : '99+'} шт.</h4>
                     </div>
                     <button className="button_circle button_circle_white button_circle_card">
                         <img src={basket} alt="basket" />

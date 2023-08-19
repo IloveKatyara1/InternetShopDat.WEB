@@ -1,12 +1,19 @@
 import React from 'react';
 
 import Carousel from '../Carousel';
+import CarouselWithData from '../CarouselWithData';
 
-const CarouselGreenBg = ({ title, children }: { title: string; children: any }) => {
+const CarouselGreenBg = (props: any) => {
     return (
         <div className="carousel_green">
-            <h2 className="title title_white left-leaf right-leaf">{title}</h2>
-            <Carousel classes="white_dots">{React.Children.map(children, (child) => child)}</Carousel>
+            <h2 className="title title_white left-leaf right-leaf">{props.title}</h2>
+            {props.link ? (
+                <CarouselWithData classes="white_dots" {...props}></CarouselWithData>
+            ) : (
+                <Carousel classes="white_dots" {...props}>
+                    {React.Children.map(props.children, (child) => child)}
+                </Carousel>
+            )}
             <button className="button button_see-all">Дивитися усі товари</button>
         </div>
     );

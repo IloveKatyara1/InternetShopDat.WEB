@@ -1,104 +1,10 @@
-import Card from '../../../Components/Card';
-import Carousel from '../../../Components/Carousel';
-
-import cardImg from '../../../assets/img/card_image.png';
+import CarouselWithData from '../../../Components/CarouselWithData';
 
 const News = () => {
     return (
         <section className="news">
             <h2 className="title left-leaf right-leaf">Новинки</h2>
-            <Carousel>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-                <div>
-                    <Card img={cardImg} name="Петунія Софістика F1" price={20} items={99} link="#" />
-                </div>
-            </Carousel>
+            <CarouselWithData link="http://localhost:3000/news" />
         </section>
     );
 };
