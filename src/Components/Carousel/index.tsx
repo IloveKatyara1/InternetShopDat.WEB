@@ -30,18 +30,18 @@ const Carousel = ({
         showSlides--;
     }
 
-    console.log(showSlides, showSlidesProp);
-
-    const childrenSlides = React.Children.map(children, (child) => {
+    const childrenSlides: any = React.Children.map(children, (child) => {
         return React.cloneElement(child, {
             className: child.props.className ? `${child.props.className} carouselComp_slide` : 'carouselComp_slide',
             style: { width: `${100 / showSlides}%` },
         });
     });
 
-    const dots = childrenSlides.map((el: any, i: number) => {
+    const dots: any = [];
+
+    childrenSlides.forEach((el: any, i: number) => {
         if (i % showSlides === 0) {
-            return (
+            dots.push(
                 <div
                     className="carouselComp__dot"
                     ref={(ref) => dotsRef.current.push(ref)}
@@ -53,19 +53,23 @@ const Carousel = ({
         }
     });
 
-    const fullChildrenList = [
-        ...childrenSlides
-            .slice(childrenSlides.length - showSlides, childrenSlides.length)
-            .map((child: any, index: number) => React.cloneElement(child, { key: `clone-${index}` })),
+    if (dots.length <= 5) infinity = false;
 
-        ...childrenSlides,
+    let fullChildrenList: [] = !infinity
+        ? [
+              ...childrenSlides
+                  .slice(childrenSlides.length - showSlides, childrenSlides.length)
+                  .map((child: any, index: number) => React.cloneElement(child, { key: `clone-${index}` })),
 
-        ...childrenSlides
-            .slice(0, showSlides)
-            .map((child: any, index: number) =>
-                React.cloneElement(child, { key: `clone-${index + childrenSlides.length}` })
-            ),
-    ];
+              ...childrenSlides,
+
+              ...childrenSlides
+                  .slice(0, showSlides)
+                  .map((child: any, index: number) =>
+                      React.cloneElement(child, { key: `clone-${index + childrenSlides.length}` })
+                  ),
+          ]
+        : childrenSlides;
 
     const ChangeSlideByBtn = (num: number) => {
         if (
@@ -82,12 +86,11 @@ const Carousel = ({
     };
 
     useEffect(() => {
-        dotsParrentRef.current.style.left = 0 + 'px';
+        if (dots.length >= 5) dotsParrentRef.current.style.left = 0 + 'px';
+        else dotsParrentRef.current.style.cssText = 'position: static; justify-content: center;';
     }, []);
 
     useEffect(() => {
-        console.log(currentSlide);
-
         if (cantMove) {
             return;
         }
@@ -136,7 +139,7 @@ const Carousel = ({
             leftPx = -16 * (correctI - 2);
         }
 
-        dotsParrentRef.current.style.left = leftPx + 'px';
+        if (dots.length > 5) dotsParrentRef.current.style.left = leftPx + 'px';
 
         sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
 
@@ -189,7 +192,7 @@ const Carousel = ({
         else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
     };
 
-    let clazz: string = ' ';
+    let clazz: string = '';
 
     if (classes) {
         clazz = Array.isArray(classes) ? classes.join(', ') : classes;
@@ -209,7 +212,7 @@ const Carousel = ({
                         onTouchStart={onStart}
                         onTouchMove={onMove}
                         onTouchEnd={onEnd}>
-                        {infinity ? fullChildrenList : childrenSlides}
+                        {fullChildrenList}
                     </div>
                 </div>
                 <button className="carouselComp__btn carouselComp__next" onClick={() => ChangeSlideByBtn(1)}>
