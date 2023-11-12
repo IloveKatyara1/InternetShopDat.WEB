@@ -25,9 +25,8 @@ const Support = ({ classes, classCircle }: { classes?: string | string[]; classC
                     <div className="support_wrapper_right">
                         <button
                             onClick={() => setPhoneDropdown((phoneDropdown) => !phoneDropdown)}
-                            className={`support__phone arrow_dropdown ${
-                                phoneDropdown ? 'arrow_dropdown_reverse' : ''
-                            }`}>
+                            className={`support__phone arrow_dropdown ${phoneDropdown ? 'arrow_dropdown_reverse' : ''}`}
+                        >
                             +38 (067) 115 00 58
                         </button>
                         <a href="#" className="support__descr">

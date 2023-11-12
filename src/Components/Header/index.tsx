@@ -89,7 +89,8 @@ const Header = () => {
                                 className={`header__li arrow_dropdown ${
                                     needLiDropdown ? 'arrow_dropdown_reverse header__li_active' : ''
                                 }`}
-                                onClick={() => setNeedLiDropdown((needLiDropdown) => !needLiDropdown)}>
+                                onClick={() => setNeedLiDropdown((needLiDropdown) => !needLiDropdown)}
+                            >
                                 Про нас
                             </li>
                             <div className={`header__li_dropdown ${needLiDropdown ? 'fadeIn' : 'fadeOut'}`}>
@@ -125,7 +126,8 @@ const Header = () => {
                     </nav>
                     <div
                         className={`header__hamburger ${needSideBar ? 'header__hamburger_active' : null}`}
-                        onClick={() => setNeedSideBar((needSideBar) => !needSideBar)}>
+                        onClick={() => setNeedSideBar((needSideBar) => !needSideBar)}
+                    >
                         <span></span>
                         <span></span>
                         <span></span>
@@ -188,7 +190,8 @@ const Header = () => {
                         className={`button_header button_header_active arrow_dropdown ${
                             needBtns ? 'arrow_dropdown_reverse' : null
                         }`}
-                        onClick={changeNeedBtn}>
+                        onClick={changeNeedBtn}
+                    >
                         <img src={iconBtn1} alt="" />
                         <p>Насіння</p>
                     </button>

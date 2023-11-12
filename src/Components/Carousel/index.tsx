@@ -1,34 +1,30 @@
 import React, { useEffect, useState, useRef } from 'react';
 
+type TVariantOfObjChangeSlides = {
+    width: number;
+    showSlides: number;
+};
+
+type TObjChangeSlides = {
+    variants: TVariantOfObjChangeSlides[];
+    deffaultValue: number;
+};
+
 const Carousel = ({
     classes,
     children,
     showSlidesProp,
     infinity = true,
+    objChangeSlides,
 }: {
     classes?: string[] | string;
     children: any;
     showSlidesProp?: number;
     infinity?: boolean;
+    objChangeSlides?: TObjChangeSlides;
 }) => {
-    const sliderContent = useRef<any>(null);
-    const dotsRef = useRef<any[]>([]);
-    const dotsParrentRef = useRef<any>(null);
-
-    const [currentSlide, setCurrentSlide] = useState<number>(0);
-    const [cantMove, setCantMove] = useState<boolean>(false);
-    const [lastActiveDot, setLastActiveDot] = useState<number>(0);
-
-    const needMinus = infinity ? 100 : 0;
-
-    let showSlides: number = showSlidesProp || 3;
-
-    if (document.documentElement.clientWidth < 515 && !showSlidesProp) {
-        showSlides--;
-    }
-    if (document.documentElement.clientWidth < 1075 && !showSlidesProp) {
-        showSlides--;
-    }
+    const [showSlides, setShowSlides] = useState<number>(showSlidesProp || 3);
+    const [lastShowSlides, setLastShowSlides] = useState(showSlides);
 
     const childrenSlides: any = React.Children.map(children, (child) => {
         return React.cloneElement(child, {
@@ -37,25 +33,40 @@ const Carousel = ({
         });
     });
 
-    const dots: any = [];
+    const getCorrectDots = (): any[] => {
+        const newDots: any[] = [];
 
-    childrenSlides.forEach((el: any, i: number) => {
-        if (i % showSlides === 0) {
-            dots.push(
-                <div
-                    className="carouselComp__dot"
-                    ref={(ref) => dotsRef.current.push(ref)}
-                    key={i}
-                    onClick={() => setCurrentSlide(i)}>
-                    {i}
-                </div>
-            );
-        }
-    });
+        childrenSlides.forEach((el: any, i: number) => {
+            if (i % showSlides === 0) {
+                newDots.push(
+                    <div
+                        className="carouselComp__dot"
+                        ref={(ref) => (dotsRef.current[i / showSlides] = ref)}
+                        key={i}
+                        onClick={() => setCurrentSlide(i)}>
+                        {i}
+                    </div>
+                );
+            }
+        });
+
+        return newDots;
+    };
+
+    const sliderContent = useRef<any>(null);
+    const dotsRef = useRef<any[]>([]);
+    const dotsParrentRef = useRef<any>(null);
+
+    const [currentSlide, setCurrentSlide] = useState<number>(0);
+    const [cantMove, setCantMove] = useState<boolean>(false);
+    const [lastActiveDot, setLastActiveDot] = useState<number>(0);
+    const [dots, setDots] = useState<any[]>(getCorrectDots());
+
+    const needMinus = infinity ? -100 : 0;
 
     if (dots.length <= 5) infinity = false;
 
-    let fullChildrenList: [] = !infinity
+    const fullChildrenList: [] = infinity
         ? [
               ...childrenSlides
                   .slice(childrenSlides.length - showSlides, childrenSlides.length)
@@ -81,29 +92,73 @@ const Carousel = ({
 
         let newCurrent = currentSlide;
         newCurrent += num > 0 ? showSlides : -showSlides;
-
         setCurrentSlide(newCurrent);
     };
 
+    const onResize = () => {
+        if (!objChangeSlides) {
+            if (document.documentElement.clientWidth < 515) setShowSlides(1);
+            else if (document.documentElement.clientWidth < 1075) setShowSlides(2);
+            else setShowSlides(3);
+        } else {
+            let wasChanged: boolean = false;
+
+            const variants = objChangeSlides['variants'];
+
+            variants.forEach((obj) => {
+                if (document.documentElement.clientWidth < obj['width']) {
+                    setShowSlides(obj['showSlides']);
+                    wasChanged = true;
+                }
+            });
+
+            if (!wasChanged) setShowSlides(objChangeSlides['deffaultValue']);
+        }
+    };
+
     useEffect(() => {
+        changeActiveDot(currentSlide);
+    }, [dots]);
+
+    useEffect(() => {
+        onResize();
+
         if (dots.length >= 5) dotsParrentRef.current.style.left = 0 + 'px';
         else dotsParrentRef.current.style.cssText = 'position: static; justify-content: center;';
+
+        window.addEventListener('resize', onResize);
+
+        return () => {
+            window.removeEventListener('resize', onResize);
+        };
     }, []);
 
     useEffect(() => {
-        if (cantMove) {
-            return;
-        }
+        const newCurrentSlide = (() => {
+            if (currentSlide % showSlides !== 0 || showSlides == 1) {
+                if (lastShowSlides > showSlides) return currentSlide + (currentSlide % showSlides);
+                else return currentSlide - (currentSlide % showSlides);
+            }
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
+            return currentSlide;
+        })();
 
-        if (currentSlide < 0) {
-            timeoutLastFirstSlide(childrenSlides.length - showSlides);
-        } else if (currentSlide >= childrenSlides.length) {
-            timeoutLastFirstSlide(0);
-        } else {
-            changeActiveDot(currentSlide);
-        }
+        setDots(getCorrectDots());
+        setCurrentSlide(newCurrentSlide);
+        setLastShowSlides(showSlides);
+        setLastActiveDot(newCurrentSlide / showSlides);
+    }, [showSlides]);
+
+    useEffect(() => {
+        if (cantMove) return;
+
+        console.log('Carousel useEffect currentSlide', currentSlide, 'currentSlide');
+
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
+
+        if (currentSlide < 0) timeoutLastFirstSlide(childrenSlides.length - showSlides);
+        else if (currentSlide >= childrenSlides.length) timeoutLastFirstSlide(0);
+        else changeActiveDot(currentSlide);
     }, [currentSlide]);
 
     const timeoutLastFirstSlide = (frstLast: number) => {
@@ -141,12 +196,34 @@ const Carousel = ({
 
         if (dots.length > 5) dotsParrentRef.current.style.left = leftPx + 'px';
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
 
-        setLastActiveDot(slide / showSlides);
+        console.log(
+            'Corousel changeActiveDot',
+            slide / showSlides,
+            'slide / showSlides',
+            lastActiveDot,
+            'lastActiveDot',
+            showSlides,
+            'showSlides',
+            slide,
+            'slide',
+            currentSlide,
+            'currentSlide',
+            dotsRef,
+            'dotsRef',
+            dots,
+            'dots',
+            dotsRef.current[lastActiveDot],
+            ' dotsRef.current[lastActiveDot]',
+            dotsRef.current[slide / showSlides],
+            'dotsRef.current[slide / showSlides]'
+        );
 
         dotsRef.current[lastActiveDot].classList.remove('carouselComp__dot_active');
         dotsRef.current[slide / showSlides].classList.add('carouselComp__dot_active');
+
+        setLastActiveDot(slide / showSlides);
     };
 
     let mouseStart: number;
@@ -172,7 +249,7 @@ const Carousel = ({
             return;
         }
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus - move / 4 + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus - move / 4 + '%';
     };
 
     const onEnd = (e: any) => {
@@ -189,7 +266,7 @@ const Carousel = ({
 
         if (end > 100) setCurrentSlide((currentSlide) => currentSlide + showSlides);
         else if (end < -100) setCurrentSlide((currentSlide) => currentSlide - showSlides);
-        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 - needMinus + '%';
+        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
     };
 
     let clazz: string = '';

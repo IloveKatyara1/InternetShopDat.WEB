@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Carousel from '../../../Components/Carousel';
 
 import partner1 from '../../../assets/img/partners/partner1.png';
@@ -9,16 +10,25 @@ import partner6 from '../../../assets/img/partners/partner6.png';
 import partner7 from '../../../assets/img/partners/partner7.png';
 
 const Partners = () => {
-    let showSlides: number = 3;
+    const [showSlides, setShowSlides] = useState<number>(3);
 
-    if (document.documentElement.clientWidth < 1075) {
-        showSlides--;
-    }
+    if (document.documentElement.clientWidth < 1075 && showSlides !== 2) setShowSlides(2);
+    else if (document.documentElement.clientWidth >= 1075 && showSlides !== 3) setShowSlides(3);
+
+    const objChangeSlidesValue = {
+        variants: [
+            {
+                width: 1075,
+                showSlides: 2,
+            },
+        ],
+        deffaultValue: 3,
+    };
 
     return (
         <div className="partners">
             <h2 className="title left-leaf right-leaf">Партнери</h2>
-            <Carousel showSlidesProp={showSlides} classes="carousel_partners" infinity={false}>
+            <Carousel classes="carousel_partners" infinity={false} objChangeSlides={objChangeSlidesValue}>
                 <div className="partners_card">
                     <img src={partner1} alt="" />
                 </div>

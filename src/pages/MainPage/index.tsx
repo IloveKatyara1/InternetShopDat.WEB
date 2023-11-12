@@ -11,8 +11,8 @@ const MainPage = () => {
             <Agrarian />
             <AboutCompany />
             <News />
-            <Discounts />
-            <Partners />
+            {/* <Discounts /> */}
+            {/* <Partners /> */}
             <Seed />
         </main>
     );
