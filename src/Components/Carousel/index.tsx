@@ -1,14 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 
-type TVariantOfObjChangeSlides = {
-    width: number;
-    showSlides: number;
-};
-
-type TObjChangeSlides = {
-    variants: TVariantOfObjChangeSlides[];
-    deffaultValue: number;
-};
+import { TObjChangeSlides } from 'helpers/enums';
 
 const Carousel = ({
     classes,
@@ -61,10 +53,11 @@ const Carousel = ({
     const [cantMove, setCantMove] = useState<boolean>(false);
     const [lastActiveDot, setLastActiveDot] = useState<number>(0);
     const [dots, setDots] = useState<any[]>(getCorrectDots());
-
-    const needMinus = infinity ? -100 : 0;
+    const [extraSlidesCount, setExtraSlidesCount] = useState(childrenSlides.length % showSlides);
 
     if (dots.length <= 5) infinity = false;
+
+    const giveMinusUninfinity = infinity ? -100 : 0;
 
     const fullChildrenList: [] = infinity
         ? [
@@ -117,7 +110,10 @@ const Carousel = ({
     };
 
     useEffect(() => {
-        changeActiveDot(currentSlide);
+        if (dots.length >= 5) dotsParrentRef.current.style.cssText = 'position: absolute;';
+        else dotsParrentRef.current.style.cssText = 'position: static; justify-content: center;';
+
+        onChangeCurrentSlide();
     }, [dots]);
 
     useEffect(() => {
@@ -143,6 +139,19 @@ const Carousel = ({
             return currentSlide;
         })();
 
+        // const futureCurrentSlide: number = (() => {
+        //     if (lastShowSlides > showSlides)
+        //         return currentSlide === lastShowSlides ? showSlides : currentSlide - (currentSlide % showSlides);
+        //     else if(lastShowSlides < showSlides)
+        //         return currentSlide === lastShowSlides
+        //             ? showSlides
+        //             : currentSlide + (showSlides - (currentSlide % showSlides));
+        //     else if(showSlides == 1)
+        //         return currentSlide
+
+        // })();
+
+        setExtraSlidesCount(childrenSlides.length % showSlides);
         setDots(getCorrectDots());
         setCurrentSlide(newCurrentSlide);
         setLastShowSlides(showSlides);
@@ -150,16 +159,42 @@ const Carousel = ({
     }, [showSlides]);
 
     useEffect(() => {
+        onChangeCurrentSlide();
+    }, [currentSlide]);
+
+    const onChangeCurrentSlide = () => {
         if (cantMove) return;
 
-        console.log('Carousel useEffect currentSlide', currentSlide, 'currentSlide');
+        sliderContent.current.style.left = -(currentSlide / showSlides) * 100 + giveMinusUninfinity + '%';
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
+        console.log(
+            'useEffect currentSlide',
+            currentSlide,
+            'currentSlide',
+            childrenSlides.length,
+            'childrenSlides.length'
+        );
 
-        if (currentSlide < 0) timeoutLastFirstSlide(childrenSlides.length - showSlides);
-        else if (currentSlide >= childrenSlides.length) timeoutLastFirstSlide(0);
-        else changeActiveDot(currentSlide);
-    }, [currentSlide]);
+        if (currentSlide < 0 && infinity) {
+            console.log('if');
+
+            if (extraSlidesCount)
+                sliderContent.current.style.left =
+                    -((currentSlide - extraSlidesCount) / showSlides) * 100 + giveMinusUninfinity - 100 + '%';
+
+            timeoutLastFirstSlide(childrenSlides.length - (extraSlidesCount || showSlides));
+        } else if (currentSlide >= childrenSlides.length - extraSlidesCount && infinity) {
+            console.log('else if');
+            if (extraSlidesCount)
+                sliderContent.current.style.left =
+                    -((currentSlide - showSlides + extraSlidesCount) / showSlides) * 100 + giveMinusUninfinity + '%';
+
+            timeoutLastFirstSlide(0);
+        } else {
+            console.log('else');
+            changeActiveDot(currentSlide);
+        }
+    };
 
     const timeoutLastFirstSlide = (frstLast: number) => {
         setCantMove(true);
@@ -167,8 +202,10 @@ const Carousel = ({
         changeActiveDot(frstLast);
 
         setTimeout(() => {
-            sliderContent.current.style.transition = '0s all';
-            sliderContent.current.style.left = (frstLast / -showSlides) * 100 - 100 + '%';
+            if (sliderContent.current !== null) {
+                sliderContent.current.style.transition = '0s all';
+                sliderContent.current.style.left = -(frstLast / showSlides) * 100 + giveMinusUninfinity + '%';
+            }
 
             setCurrentSlide(frstLast);
 
@@ -176,7 +213,7 @@ const Carousel = ({
                 setCurrentSlide(frstLast);
                 setCantMove(false);
 
-                sliderContent.current.style.transition = '1s all';
+                if (sliderContent.current !== null) sliderContent.current.style.transition = '1s all';
             }, 25);
         }, 975);
     };
@@ -186,38 +223,25 @@ const Carousel = ({
 
         const correctI = slide / showSlides;
 
-        if (correctI < 2) {
-            leftPx = 0;
-        } else if (correctI > childrenSlides.length / showSlides - 3) {
+        if (correctI > childrenSlides.length / showSlides - 3) {
             leftPx = -16 * (childrenSlides.length / showSlides - 5);
-        } else {
+        } else if (!(correctI < 2)) {
             leftPx = -16 * (correctI - 2);
         }
 
         if (dots.length > 5) dotsParrentRef.current.style.left = leftPx + 'px';
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
-
         console.log(
-            'Corousel changeActiveDot',
             slide / showSlides,
             'slide / showSlides',
-            lastActiveDot,
-            'lastActiveDot',
-            showSlides,
-            'showSlides',
             slide,
             'slide',
-            currentSlide,
-            'currentSlide',
+            showSlides,
+            'showSlides',
             dotsRef,
             'dotsRef',
             dots,
-            'dots',
-            dotsRef.current[lastActiveDot],
-            ' dotsRef.current[lastActiveDot]',
-            dotsRef.current[slide / showSlides],
-            'dotsRef.current[slide / showSlides]'
+            'dots'
         );
 
         dotsRef.current[lastActiveDot].classList.remove('carouselComp__dot_active');
@@ -249,7 +273,7 @@ const Carousel = ({
             return;
         }
 
-        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus - move / 4 + '%';
+        sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + giveMinusUninfinity - move / 4 + '%';
     };
 
     const onEnd = (e: any) => {
@@ -266,7 +290,7 @@ const Carousel = ({
 
         if (end > 100) setCurrentSlide((currentSlide) => currentSlide + showSlides);
         else if (end < -100) setCurrentSlide((currentSlide) => currentSlide - showSlides);
-        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + needMinus + '%';
+        else sliderContent.current.style.left = (currentSlide / -showSlides) * 100 + giveMinusUninfinity + '%';
     };
 
     let clazz: string = '';

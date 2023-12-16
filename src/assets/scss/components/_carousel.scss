@@ -138,18 +138,13 @@
     }
 }
 
-.carousel_partners__dots_wrapper_parent {
-    overflow: visible;
-}
-
-.carousel_partners__dots_wrapper {
-    position: static;
-    margin: 0 auto;
-}
-
 .carousel_partners {
     height: auto;
     margin: 39px auto 40px auto;
+
+    &__dots_wrapper_parent {
+        width: 78px;
+    }
 }
 
 .dots_overflow {
